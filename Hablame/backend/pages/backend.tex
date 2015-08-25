@@ -1,0 +1,97 @@
+\section{Überarbeitung der Server-Architektur}
+	Im Rahmen der Projektarbeit soll die serverseitige Architektur überarbeitet
+	und mit der Nutzung von modernen Tools und Frameworks ausgestattet werden.
+	Diese Optimierungen werden in den folgenden Unterkapiteln beschrieben.
+	
+	\subsection{Datenbank}
+		Eine Anforderung an das Projekt war es, dass die bisherige Nutzung einer
+		Oracle Datenbank abgelöst wird durch eine frei verfügbare Datenbank. Das Team
+		entschied sich für das freie relationale Datenbankmanagementsystem MySQL in
+		der aktuellsten produktiven Version 5.6.26 zum Zeitpunkt dieser Arbeit.
+		Dies bringt den großen Vorteil mit sich, eine weitverbreitete quelloffene, statt
+		einer proprietären Datenbank Software zu nutzen.
+		
+	\subsection{Einsatz moderner Technologien}
+		Eine weitere Anforderung stellt die Nutzung moderner Frameworks und
+		Technologien dar. Um einerseits einen guten Programmierstil sicher stellen zu
+		können und andererseits die Kollaboration zu verbessern, sowie zukünftigen
+		Projektteams den Einstieg maßgeblich zu erleichtern.
+
+		\subsubsection{Das Spring Framework}
+			Spring ermöglicht es durch so genannte Annotationen die Persistierung von
+			Objekten unter Zuhilfenahme von Hibernate mit Object-Relational-Mapping zu
+			vereinfachen. Zusätzlich wird das Testen mit Unittests durch JUnit
+			simplifiziert und die Instanziierung von Objekten zur Laufzeit im
+			Singleton-Pattern durchgeführt. Das Speichern und Lesen von Objekten kann
+			unter Spring beispielsweise durch Interfaces mit der @Respository Annotation
+			übernommen werden. So ist es möglich ohne eine SQL Anweisung selbst zu
+			schreiben, Datenbankzugriffe zu realisieren und mit Objekten zu arbeiten.
+			Dies erleichtert das Erstellen der Daten-Zugriffsschicht enorm. Diese
+			Fähigkeit wird durch das Beerben des Interfaces CrudRepository, oder eines
+			davon erbenden Interfaces erworben. Das Beerben eines dieser Interfaces
+			verpflichtet zu den grundlegenden Datenbankoperationen Create, Read, Update
+			und Delete eines spezifischen Objekttyps. Somit können POJOs in der
+			Datenbank direkt abgespeichert werden. Diese werden in Form von separaten
+			Model-Klassen angelegt, mit der @Entity Annotation versehen und sind somit
+			als Datenbank-Entität gekennzeichnet. Weiterhin kann der Tabellenname, sowie
+			einzelne Spaltennamen angegeben werden und Kardinalitäten zu anderen POJOs
+			festgelegt werden, z.B. hat eine Kategorie mehrere Themengebiete.\\
+			Die Spring Hierarchie ist ein wesentlicher Bestandteil der neu designten
+			Server-Architektur und soll hier deshalb zusätzlich Einzug erhalten. Wie
+			bereits erwähnt können einzelne Interfaces mit der @Repository Annotation für
+			ORM genutzt werden. Diese Datenbankschicht der Hierarchie ist die unterste
+			der drei und wird von der darüber befindlichen Service-Ebene genutzt. Hier
+			werden Klassen mit der @Service Annotation zum Service ermächtigt, was dem
+			Spring Kontext mitteilt, dass diese Services zur Laufzeit als Singleton
+			Instanziiert werden. Services nutzen also die darunter liegenden Repositories
+			für den Datenbankzugriff und verarbeiten die Daten weiter, bzw. führen andere
+			gewünschte Operationen aus. Services stellen also Logikschicht dar. Diese
+			Logikschicht wird von der API, den sogenannten Controllern genutzt, um
+			Anfragen, sogenannte Web-Requests in Form eines GET oder POST, weiter
+			bearbeiten zu können. Ein Controller hält die @Autowired Annotierten Services
+			und dieser wiederum die Repositories und diese Objekte werden zur Laufzeit
+			Instanziiert.
+
+		\subsubsection{Testing mit JUnit}
+			Wenn auch nicht bisher beachtet, ist das Testen von Programmcode einer der
+			wichtigsten Bereiche und stellt sicher, dass bisher Implementiertes auch
+			erwartungsgemäß funktioniert. Deshalb wurde JUnit – ein Framework zum Testen
+			von Java-Programmen – eingeführt und einige Tests bereits implementiert, an
+			denen sich zukünftige Teams orientieren können. Dank der Mockito
+			Bibliotheken ist es möglich, auch die Controller-API zu testen, welche den
+			Chatbot auch von außen über Requests erreichbar und ansprechbar macht.
+
+	\subsection{Dokumentation}
+		Eine Dokumentation stellt einerseits die Übersichtlichkeit und
+		Nachvollziehbarkeit für Dritte und den Entwickler selbst her und optimiert
+		andererseits die Einarbeitung nachfolgender Projektteams durch wesentlich
+		verkürzte Zeiten enorm. Dies wurde in Form von zwei erwähnenswerten Punkten
+		angestrebt, welche in den nachfolgenden Unterkapiteln erläutert werden
+		sollen.
+		
+		\subsubsection{Javadocs und Codedokumentation}
+			In der neuen Server-Architektur wurde jede implementierte Klasse mitsamt
+			jeder dort realisierten Methode dokumentiert. Das ermöglicht beim Aufruf
+			einer Klasse bzw. Methode eine Anzeige dieser Javadocs, was automatisch über
+			die IDE realisiert wird. Wenn beispielsweise eine neue Extension für den
+			Chatbot realisiert werden soll, kann der Entwickler über die Nutzung von
+			bereits vorhandenen Erweiterungen und vor allem deren Dokumentiertem
+			nachvollziehen wie dies umzusetzen ist.
+
+		\subsubsection{Redmine}
+			Als einzige bekannte und weit verbreitete Projektmanagement Software, die
+			quelloffen und für den eigenen Gebraucht selbst aufgesetzt werden kann, kam
+			Redmine in Frage, welche auf dem für das Projekt verfügbaren Windows 2008 R2
+			Server installiert und unter dem bestehenden Apache Webserver konfiguriert
+			wurde. Diese ermöglicht es dem Projektteam über diverse Features effizient
+			an diesem und auch künftigen Projekten zu arbeiten. Redmine enthält
+			beispielsweise ein Ticketsystem, welches für Aufgabenverteilung und
+			Zeitmanagement genutzt werden kann. Außerdem ist es dem Projektleiter
+			möglich, auf einfache Weise einzusehen, wie der Stand einzelner Aufgaben
+			ist. Ein internes Wiki enthält wichtige Dokumentation über sensible Zugänge
+			und Informationen, sowie Dokumente. Ein Kalender pro Projekt und eine E-Mail
+			Funktion erhöht die Kommunikationsfähigkeit und steigert die Effizienz
+			weiter. Über all diesen Möglichkeit steht natürlich die Zugriffssicherheit,
+			welche ein integriertes Benutzermanagement darstellt, über welches neue
+			Teammitglieder eingepflegt werden können und obsolete als inaktiv markiert,
+			bzw. gelöscht werden können.
