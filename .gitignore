@@ -1,6 +1,6 @@
 /Hablame/out/
 /Hablame/tmp/
 /Hablame/document.synctex.gz
-/Hablame/.settings/
+.settings/*
 .texclipse
 .project
