@@ -4,3 +4,9 @@
 .settings/*
 .texclipse
 .project
+*.aux
+*.dvi
+*.lof
+*.out
+*.toc
+*.log
