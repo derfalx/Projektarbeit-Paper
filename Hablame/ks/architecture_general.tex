@@ -23,18 +23,20 @@ https://github.com/TeamChatbot/Hablame-BotBackend\\
 Durch diese Aufteilung kann besser und unabhängiger an den einzelnen Teilprojekten gearbeitet werden.
 
 \subsubsection{Aktuelle Aufgabenverteilung auf die Teilprojekte}
-Durch das Hinzufügen der Service-API-Library ergibt sich nachfolgend dargestellter Gesamtaufbau.\\
+Durch das Hinzufügen der Service-API-Library ergibt sich nachfolgend
+dargestellter Gesamtaufbau, bei welchem jedes Teilprojekt eine
+Teilaufgabe des Gesamtsystems übernimmt:
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.7\linewidth]{ks/graphics/arch.png}
 	\caption{Gesamtaufbau Hablame}
 	\label{fig:arch}
-\end{figure}\\
-Jedes Teilprojekt behandelt ein Teilproblem des Gesamtsystems.\\
+\end{figure}
+\\\\
 Android App:
 \begin{itemize}\itemsep0pt
-	\item Umwandlung gesprochener Sprache in Text ("Speech-To-Text")
-	\item Umwandlung von Text in gesprochene Sprache ("Text-To-Speech")
+	\item Umwandlung gesprochener Sprache in Text ("`Speech-To-Text"')
+	\item Umwandlung von Text in gesprochene Sprache ("`Text-To-Speech"')
 	\item Weiterleiten der Informationen mittels der API-Service-Library an das Backend
 \end{itemize}
 API-Service-Library:
@@ -48,38 +50,67 @@ Backend:
 	\item Auswerten der Serviceanfragen
 \end{itemize}
 
-\subsection{Dokumentation im Allgemeinen}
-Für die Dokumentation gibt es nun mehrere Anlaufstellen. In Redmine gibt es ein
-integriertes Wiki welches wir bereits mit einigen Informationen zu allgemeine
-Dingen wie Logindaten und den einzelnen Repositories, aber auch zu genutzten
-Technologien wie beispielsweise das Git-System gefüllt.\footnote{Projekt Wiki
-in Redmine: http://194.95.221.229/redmine/projects/hablame/wiki/} Zusätzlich zu
-dem Wiki gibt es in jedem Repository ein Readme, das nochmal zusätzlich einen
-Überblick über das dortige Projekt gibt.\\
-Die Dokumentation des Programmcodes ist mittels dem Java Tool JavaDocs
-umgesetzt worden. Die damit generierten Dokumentationsseiten sind im jeweiligen
-Repository auf Github zu finden.
+\subsection{Dokumentation und Projektmanagement}
+	Eine Dokumentation stellt einerseits die Übersichtlichkeit und
+	Nachvollziehbarkeit für Dritte und den Entwickler selbst her und verkürzt
+	andererseits die Einarbeitungszeit nachfolgender Projektteams enorm. Mit
+	vorhandenem Projektmanagement Tools kann die Kollaboration im Team noch weiter
+	optimiert werden. Diese Ziele wurden in Form von zwei erwähnenswerten Punkten
+	angestrebt, welche in den nachfolgenden Unterkapiteln erläutert werden sollen.
+	
+	\subsubsection{Javadocs und Codedokumentation}
+		In jedem der drei Teilprojekte wurde Wert auf dokumentierten Code gelegt. Dies
+		bedeutet, dass jede implementierte Klasse mitsamt jeder dort realisierten
+		Methode dokumentiert ist. Das ermöglicht beim Aufruf einer Klasse bzw. Methode
+		eine Anzeige dieser Javadocs, was automatisch über die IDE realisiert wird.
+		Wenn beispielsweise eine neue Extension für den Chatbot realisiert werden
+		soll, kann der Entwickler über die Nutzung von bereits vorhandenen
+		Erweiterungen und vor allem deren dokumentierten Text nachvollziehen wie dies
+		umzusetzen ist. Zusätzlich wurden Dokumentationsseiten der JavaDocs angelegt
+		und im jeweiligen Repository auf Github gespeichert.
+		
+	\subsubsection{Redmine}
+		Als einzige bekannte und weit verbreitete Projektmanagement Software, die
+		quelloffen und für den eigenen Gebraucht selbst aufgesetzt werden kann, kam
+		Redmine in Frage, welche auf dem für das Projekt verfügbaren Windows 2008 R2
+		Server installiert und unter dem bestehenden Apache Webserver konfiguriert
+		wurde. Diese ermöglicht es dem Projektteam über diverse Features effizient
+		an diesem und auch künftigen Projekten zu arbeiten. Redmine enthält
+		beispielsweise ein Ticketsystem, welches für Aufgabenverteilung und
+		Zeitmanagement genutzt werden kann. Außerdem ist es dem Projektleiter
+		möglich, auf einfache Weise einzusehen, wie der Stand einzelner Aufgaben
+		ist. Ein internes Wiki\footnote{Projekt Wiki in Redmine:
+		http://194.95.221.229/redmine/projects/hablame/wiki/} enthält wichtige
+		Dokumentation über sensible Zugänge und Informationen, sowie Dokumente. Ein
+		Kalender pro Projekt und eine E-Mail Funktion erhöht die
+		Kommunikationsfähigkeit und steigert die Effizienz weiter. Über all diesen
+		Möglichkeit steht natürlich die Zugriffssicherheit, welche ein integriertes
+		Benutzermanagement darstellt, über welches neue Teammitglieder eingepflegt
+		werden können und obsolete als inaktiv markiert, bzw. gelöscht werden können.
+		Die Redmine Instanz ist über folgenden Link zu erreichen:
+		http://194.95.221.229/redmine.
 
 \subsection{Unit Testing}
-Neu ist auch das, bisher nicht beachtete, automatisierte Testen des
-Programmcodes. Hierfür wird auf das Java Framework JUnit
-zurückgegriffen.\footnote{Projektseite von JUnit: http://junit.org/} Durch das
-Nutzen eines solchen Frameworks ist es möglich automatisiert Programmcode auf
-die korrekte Ausführung zu testen. Gerade in einem großen System wie das
-Backend nimmt das einiges an arbeit ab, während es die Wartbarkeit deutlich erhöht.\\
-Aktuell wird es sowohl im Backend, als auch in der Service-API-Library genutzt.\\
-Im Backend werden zusätzlich noch die Mockito Bibliotheken genutzt, da es mit
-diesen ermöglicht wird zusätzlich noch die Controller-API zu testen, welche den
-Chatbot von außen über Requests erreichbar und ansprechbar macht.
+	Neu ist auch das, bisher nicht beachtete, automatisierte Testen des
+	Programmcodes. Hierfür wird auf das Java Framework JUnit
+	zurückgegriffen.\footnote{Projektseite von JUnit: http://junit.org/} Durch das
+	Nutzen eines solchen Frameworks ist es möglich automatisiert Programmcode auf
+	die korrekte Ausführung zu testen. Gerade in einem großen System wie dem
+	Java Backend nimmt das einiges an Arbeit ab, während es die Wartbarkeit
+	deutlich erhöht.\\
+	Aktuell wird es sowohl im Backend, als auch in der Service-API-Library genutzt.\\
+	Im Backend werden zusätzlich noch die Mockito Bibliotheken genutzt, da es mit
+	diesen ermöglicht wird zusätzlich noch die Controller-API zu testen, welche den
+	Chatbot von außen über Requests erreichbar und ansprechbar macht.
 
 \subsection{Build Management mit Maven}
-Ein Problem im bisherigen Projekt war, dass Abhängigkeiten und der Buildvorgang
-nicht zentral geregelt wurden. So wurden genutzte Bibliotheken als Jar-Archive
-eingebunden. Dies hat zur Folge das diese Bibliotheken zu meist händisch in das
-Arbeitssystem geladen werden müssen. Um dies zu vereinfachen und den
-Buildvorgang zu vereinheitlichen wird im Backend sowie der Service-API-Library
-nun das Build Management Tool Maven verwendet.\footnote{Projektseite von Maven:
-https://maven.apache.org/} Somit gibt es jetzt in beiden Projekten einen
-einheitlichen Punkt für die Konfiguration der Abhängigkeiten und des
-Buildvorgangs, die pom.xml.
+	Ein Problem im bisherigen Projekt war, dass Abhängigkeiten und der Buildvorgang
+	nicht zentral geregelt wurden. So wurden genutzte Bibliotheken als Jar-Archive
+	eingebunden. Dies hat zur Folge das diese Bibliotheken zu meist händisch in das
+	Arbeitssystem geladen werden müssen. Um dies zu vereinfachen und den
+	Buildvorgang zu vereinheitlichen wird im Backend sowie der Service-API-Library
+	nun das Build Management Tool Maven verwendet.\footnote{Projektseite von Maven:
+	https://maven.apache.org/} Somit gibt es jetzt in beiden Projekten einen
+	einheitlichen Punkt für die Konfiguration der Abhängigkeiten und des
+	Buildvorgangs, die pom.xml.
 
