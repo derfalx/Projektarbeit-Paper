@@ -12,3 +12,6 @@
 *.log
 *.pdf
 /.texlipse
+*.nav
+*.snm
+*.synctex.gz
