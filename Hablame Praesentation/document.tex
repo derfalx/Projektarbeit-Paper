@@ -71,10 +71,8 @@ Würzburg-Schweinfurt
 \beamerdefaultoverlayspecification{<+->}
 
 \begin{document}
-
 % titlepage
 \input{slides/general/titlepage.tex}
-
 % toc
 \input{slides/general/toc.tex}
 
@@ -82,8 +80,9 @@ Würzburg-Schweinfurt
 	\input{slides/general/general.tex}		
 \section{Organisatorisches}
 	\subsection{Redmine}
-		\input{slides/organisation/wiki.tex}		
-	\subsection{Repositories}
+		\input{slides/organisation/redmine.tex}		
+	\subsection{Versionsverwaltung (GitHub)}
+		\input{slides/organisation/old-repo.tex}
 		\input{slides/organisation/repo.tex}
 	\subsection{Dokumentation}
 		\input{slides/organisation/doc.tex}
@@ -100,29 +99,5 @@ Würzburg-Schweinfurt
 		\input{slides/projects/backend/backend.tex}
 \section{Aussicht}
 	\input{slides/general/aussicht.tex}
-
-%\begin{frame}
-%\frametitle{}
-
-% You can create overlays
-%\begin{itemize}
-%  \item using the \texttt{pause} command:
-%  \begin{itemize}
-%    \item First item.
-%    \pause
-%    \item Second item.
-%  \end{itemize}
-%  \item using overlay specifications:
-%  \begin{itemize}
-%    \item<3-> First item.
-%    \item<4-> Second item.
-%  \end{itemize}
-%  \item using the general \texttt{uncover} command:
-%  \begin{itemize}
-%    \uncover<5->{\item First item.}
-%    \uncover<6->{\item Second item.}
-%  \end{itemize}
-%\end{itemize}
-%\end{frame}
 
 \end{document}
