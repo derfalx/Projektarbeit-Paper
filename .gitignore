@@ -15,3 +15,5 @@
 *.nav
 *.snm
 *.synctex.gz
+/Hablame Praesentation/out/
+/Hablame Praesentation/tmp/
